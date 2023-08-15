@@ -34,6 +34,7 @@ function  MapContent() {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
+
   return (
     <div className={styles.container}>
       <GoogleMap
