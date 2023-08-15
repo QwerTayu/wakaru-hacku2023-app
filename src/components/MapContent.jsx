@@ -1,79 +1,53 @@
-import GoogleMapReact from 'google-map-react';
 import styles from './Content.module.css'
+import PlaceInfo from '@/components/PlaceInfo';
 
-import { useEffect, useState } from 'react';
-import { collection, getDocs, onSnapshot } from "firebase/firestore"
+import { GoogleMap, useLoadScript} from '@react-google-maps/api';
+import { useCallback, useRef } from 'react';
 
-export default function MapContent() {
-  const [users, setUsers] = useState([]);
-  const defaultLatLng = {
-    lat: 35.7022589,
-    lng: 139.7744733,
-  };
+const libraries = ["places"];
+const mapContainerStyle = {
+  width: "100%",
+  height: "100%",
+};
 
-  const items = [
-    defaultLatLng,
-    {
-      lat: 36.7022589,
-      lng: 135.7744733,
-    },
-    {
-      lat: 37.7022589,
-      lng: 130.7744733,
-    },
-    {
-      lat: 32.7022589,
-      lng: 142.7744733,
-    },
-  ];
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
-  // useEffect(() => {
-  //   // データを取得する処理
-  //   const fetchData = async () =>{
-  //     const userData = collection(db, "user");
+const center = {
+  lat: 35.69575,
+  lng: 139.77521,
+};
 
+function  MapContent() {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
+    libraries,
+  });
 
-  //     try {
-  //     const snapshot = await getDocs(userData);
-  //     const userDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
-  //     setUsers(userDocs);
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
 
-  //     onSnapshot(userData, (snapshot) => {
-  //       const updatedUserDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
-  //       setUsers(updatedUserDocs);
-  //     });
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+  if (loadError) return "Error";
+  if (!isLoaded) return "Loading...";
 
-  //   fetchData();
-  // }, []);
-
-  const handleApiLoaded = ({ map, maps }) => {
-    process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY;
-    const bounds = new maps.LatLngBounds();
-    items.forEach((item) => {
-      const marker = new maps.Marker({
-        position: {
-          lat: item.lat,
-          lng: item.lng,
-        },
-        map,
-      });
-      bounds.extend(marker.position);
-    });
-    map.fitBounds(bounds);
-  };
 
   return (
     <div className={styles.container}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY }}
-        defaultZoom={16}
-        defaultCenter={defaultLatLng}
-        onGoogleApiLoaded={handleApiLoaded}
-      />
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle} 
+        center={center} 
+        zoom={10}
+        options={options}
+        onLoad={onMapLoad}
+      >
+        <PlaceInfo />
+      </GoogleMap>
     </div>
   );
 };
+
+export default MapContent;
