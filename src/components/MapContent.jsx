@@ -1,6 +1,5 @@
 import styles from './Content.module.css'
 import PlaceInfo from '@/components/PlaceInfo';
-// import db from "@/firebase";
 
 import { GoogleMap, useLoadScript} from '@react-google-maps/api';
 import { useCallback, useRef } from 'react';
