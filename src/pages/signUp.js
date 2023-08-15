@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import styles from '../styles/SignIn.module.css'
+import styles from '../styles/Sign.module.css'
 import { signUpWithEmailAndPassword } from "@/firebase";
 
 
-function signIn() {
+function signUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,7 +18,7 @@ function signIn() {
     return (
         <div className={styles.formContainer}>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <h1 className={styles.title}>ログイン</h1>
+                <h1 className={styles.title}>Sign Up</h1>
                 <hr />
                 <div className={styles.uiForm}>
                     <div className={styles.formField}>
@@ -48,4 +48,4 @@ function signIn() {
     );
 }
 
-export default signIn;
+export default signUp;
