@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateCurrentUser } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,7 +19,8 @@ const auth = getAuth(app);
 const signUpWithEmailAndPassword = async (email, password) => {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password);
-  
+    await sendEmailVerification(auth.currentUser);    
+    
     alert("user created successfully")
 
     return user;
