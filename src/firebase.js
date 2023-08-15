@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,11 +13,20 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const db = getFirestore(app);
 const auth = getAuth(app);
 
-const db = getFirestore(app);
+const signUpWithEmailAndPassword = async (email, password) => {
+  try {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+  
+    alert("user created successfully")
 
-const provider = new GoogleAuthProvider();
+    return user;
+  } catch (error) {
+    alert("failed to create user");
+    console.log(error);
+  }
+}
 
-export { db, auth, provider };
+export { db, signUpWithEmailAndPassword};
