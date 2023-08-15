@@ -82,3 +82,8 @@
     font-size: 12px;
     height: 12px;
 }
+
+.sign {
+    font-size: 12px;
+    align-self: flex-end;
+}
