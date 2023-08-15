@@ -1,6 +1,6 @@
 import GoogleMapReact from 'google-map-react';
 import styles from './Content.module.css'
-import db from '@/firebase'
+
 import { useEffect, useState } from 'react';
 import { collection, getDocs, onSnapshot } from "firebase/firestore"
 
