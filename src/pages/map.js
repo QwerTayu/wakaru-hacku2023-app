@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import MapContent from '@/components/MapContent'
 import Header from '@/components/Header'
 import Menu from '@/components/Menu'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Map() {
   return (
     <>
     <Head>
@@ -15,6 +16,7 @@ export default function Home() {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header />
+    <MapContent />
     <Menu />
     </>
   )
