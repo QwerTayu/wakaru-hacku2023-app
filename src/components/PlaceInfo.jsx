@@ -28,7 +28,7 @@ export default function PlaceInfo () {
 
     return (
         <>
-            {users.map((user) => (
+            {users.filter((user) => user.isInOffice === true).map((user) => (
                 // <MarkerF
                 // key={user.id}
                 // position={{
@@ -43,6 +43,7 @@ export default function PlaceInfo () {
                 // }}
                 // />
                 <InfoWindowF
+                    key={user.id}
                     position={{
                         lat: user.placeLat,
                         lng: user.placeLng,
