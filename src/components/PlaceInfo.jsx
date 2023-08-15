@@ -1,7 +1,7 @@
 import { InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import firebase from "@/firebase";
+import { db } from "@/firebase";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
 
 export default function PlaceInfo () {
@@ -10,7 +10,7 @@ export default function PlaceInfo () {
 
     useEffect(() => {
         // データベースからデータを取得する
-        const userData = collection(firebase.db, "user");
+        const userData = collection(db, "user");
         getDocs(userData).then((snapShot) => {
             // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
             setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
