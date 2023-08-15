@@ -51,7 +51,7 @@ export default function MapContent() {
   // }, []);
 
   const handleApiLoaded = ({ map, maps }) => {
-    process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY
+    console.log(process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY);
     const bounds = new maps.LatLngBounds();
     items.forEach((item) => {
       const marker = new maps.Marker({
