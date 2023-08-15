@@ -1,5 +1,6 @@
 import GoogleMapReact from 'google-map-react';
 import styles from './Content.module.css'
+import db from "@/firebase";
 
 import { useEffect, useState } from 'react';
 import { collection, getDocs, onSnapshot } from "firebase/firestore"
@@ -14,10 +15,6 @@ export default function MapContent() {
   const items = [
     defaultLatLng,
     {
-      lat: 36.7022589,
-      lng: 135.7744733,
-    },
-    {
       lat: 37.7022589,
       lng: 130.7744733,
     },
@@ -27,36 +24,45 @@ export default function MapContent() {
     },
   ];
 
-  // useEffect(() => {
-  //   // データを取得する処理
-  //   const fetchData = async () =>{
-  //     const userData = collection(db, "user");
+  useEffect(() => {
+    // データを取得する処理
+    // const fetchData = async () =>{
+    //   const userData = collection(db, "user");
 
+    //   try {
+    //   const snapshot = await getDocs(userData);
+    //   const userDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
+    //   setUsers(userDocs);
 
-  //     try {
-  //     const snapshot = await getDocs(userData);
-  //     const userDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
-  //     setUsers(userDocs);
+    //   onSnapshot(userData, (snapshot) => {
+    //     const updatedUserDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
+    //     setUsers(updatedUserDocs);
+    //   });
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //   }
+    // };
 
-  //     onSnapshot(userData, (snapshot) => {
-  //       const updatedUserDocs = snapshot.docs.map((doc) => ({ ...doc.data() }));
-  //       setUsers(updatedUserDocs);
-  //     });
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+    // fetchData();
 
-  //   fetchData();
-  // }, []);
+    const userData = collection(db, "user");
+    getDocs(userData).then((snapShot) => {
+      // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
+      setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
+    });
+
+  }, []);
+
+  // console.log(users);
 
   const handleApiLoaded = ({ map, maps }) => {
     const bounds = new maps.LatLngBounds();
-    items.forEach((item) => {
+    
+    users.forEach((user) => {
       const marker = new maps.Marker({
         position: {
-          lat: item.lat,
-          lng: item.lng,
+          lat: user.placeLat,
+          lng: user.placeLng,
         },
         map,
       });
