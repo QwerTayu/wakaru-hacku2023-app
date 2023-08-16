@@ -55,4 +55,4 @@ const logOut = async () => {
   }
 }
 
-export { db, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
+export { db, auth, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
