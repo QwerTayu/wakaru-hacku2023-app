@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styles from '../styles/Sign.module.css'
 import { signUpWithEmailAndPassword } from "@/firebase";
 import Link from 'next/link';
-
+import FormContent from '@/components/FormContent';
+import router from 'next/router'
 
 function signUp() {
     const [newEmail, setNewEmail] = useState('');
@@ -12,41 +12,25 @@ function signUp() {
         e.preventDefault();
         const user = await signUpWithEmailAndPassword(newEmail, newPassword);
         console.log(user);
+        if (user) {  
+            await router.push('/signIn')
+        }
         setNewEmail('');
         setNewPassword('');
     };
 
     return (
-        <div className={styles.formContainer}>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <h1 className={styles.title}>サインアップ</h1>
-                <hr />
-                <div className={styles.uiForm}>
-                    <div className={styles.formField}>
-                        <label>メールアドレス</label>
-                        <input
-                            type="text"
-                            placeholder='メールアドレス'
-                            name='mailAddress'
-                            value={newEmail}
-                            onChange={(e) => setNewEmail(e.target.value)}
-                        />
-                    </div>
-                    <div className={styles.formField}>
-                        <label>パスワード</label>
-                        <input
-                            type="password"
-                            placeholder='パスワード'
-                            name='password' 
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
-                    </div>
-                    <button type={'submit'} className={styles.submitButton}>登録</button>
-                    <p className={styles.sign}><Link href='/signIn'>ログインはこちら</Link></p>
-                </div>
-            </form>
-        </div>
+        <FormContent 
+            title="サインアップ" 
+            email={newEmail}
+            setEmail={setNewEmail}
+            password={newPassword}
+            setPassword={setNewPassword}
+            handleSubmit={handleSubmit}
+            button="登録"
+            description="ログインはこちら"
+            link="./signIn"
+        />
     );
 }
 
