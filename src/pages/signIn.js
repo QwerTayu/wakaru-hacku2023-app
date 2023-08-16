@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { logInWithEmailAndPassword, logOut } from "@/firebase";
-import Link from 'next/link';
 import FormContent from '@/components/FormContent';
 import router from 'next/router'
 
