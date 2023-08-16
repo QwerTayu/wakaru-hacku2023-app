@@ -4,7 +4,7 @@ import styles from "./Menu.module.css";
 function Menu() {
   return (
     <div className={styles.menu}>
-      <Link href="/">
+      <Link href="home">
         Home
       </Link>
       <Link href="status">
