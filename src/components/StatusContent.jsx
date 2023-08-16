@@ -5,23 +5,23 @@ function StatusContent() {
   const members = [
     {
       name: '山田太郎',
-      icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      icon: '/userIcon.jpg',
     },
     {
       name: '山田次郎',
-      icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      icon: '/userIcon.jpg',
     },
     {
       name: '山田三郎',
-      icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      icon: '/userIcon.jpg',
     },
     {
       name: '山田四郎',
-      icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      icon: '/userIcon.jpg',
     },
     {
       name: '山田五郎',
-      icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      icon: '/userIcon.jpg',
     }
   ];
 
