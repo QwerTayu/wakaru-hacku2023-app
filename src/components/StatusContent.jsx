@@ -4,28 +4,6 @@ import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase';
 
 function StatusContent() {
-  const members = [
-    {
-      name: '山田太郎',
-      icon: '/userIcon.jpg',
-    },
-    {
-      name: '山田次郎',
-      icon: '/userIcon.jpg',
-    },
-    {
-      name: '山田三郎',
-      icon: '/userIcon.jpg',
-    },
-    {
-      name: '山田四郎',
-      icon: '/userIcon.jpg',
-    },
-    {
-      name: '山田五郎',
-      icon: '/userIcon.jpg',
-    }
-  ];
 
   const [users, setUsers] = useState([]);
 
