@@ -1,6 +1,5 @@
 import styles from './Content.module.css'
 import PlaceInfo from '@/components/PlaceInfo';
-import UserPosition from '@/components/UserPosition';
 
 import { GoogleMap, useLoadScript} from '@react-google-maps/api';
 import { useCallback, useRef } from 'react';

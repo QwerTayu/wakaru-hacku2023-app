@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
             setUser(user);
             if (!user) {
                 console.log("please login");
-                alert("please login!!");
                 router.push('/');
             }
         });
