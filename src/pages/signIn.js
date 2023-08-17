@@ -8,34 +8,14 @@ import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 function signIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    let isExits = false;
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         const user = await logInWithEmailAndPassword(email, password);
         if (user) { 
-            console.log(doc(col, "XM2I17YCZfEECpYJvMzx"));
-            const querySnapshot = await getDocs(col);
-            querySnapshot.forEach((user) => {
-              if( user.id === auth.currentUser.uid){
-                  isExits = true;
-                  console.log("Yeess"+user.id);
-              }
-            });
-            if (!isExits) { // ユーザーが存在しない場合は作成
-                try {
-                    await setDoc(doc(col, auth.currentUser.uid), {
-                        username: auth.currentUser.email,
-                        isInOffice: true,
-                        placeLat: 35,
-                        placeLng: 135,
-                    });
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                }
-            }
-            isExits = false;
-            await router.push('/home')
+            await router.push('/home');
+        } else {
+            await router.push('/signUp')
         }
         setEmail('');
         setPassword('');
