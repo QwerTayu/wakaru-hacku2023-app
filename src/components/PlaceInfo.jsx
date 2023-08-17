@@ -1,12 +1,19 @@
 import { InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import { db, col } from "@/firebase";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { db, col, auth } from "@/firebase";
+import { collection, doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+
+import UserPosition from './UserPosition';
 
 export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
+
+    const docRef = doc(col, auth.currentUser.uid);
+    
+    updateDoc(docRef, {placeLat: UserPosition().latitude});
+    updateDoc(docRef, {placeLng: UserPosition().longitude});
 
     useEffect(() => {
         // データベースからデータを取得する
@@ -20,7 +27,10 @@ export default function PlaceInfo () {
                 setUsers(user.docs.map((doc) => ({ ...doc.data() })));
             });
         });
+
     }, []);
+
+    console.log(UserPosition());
 
     return (
         <>
