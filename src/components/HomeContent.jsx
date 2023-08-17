@@ -6,13 +6,19 @@ function HomeContent() {
 
   const [userStatus, setUserStatus] = useState(false)
 
+  const handleChangeStatus = (e) => {
+    setUserStatus(!userStatus)
+  };
+
+  
+
   return (
     <div className={styles.container}>
     <UserInfo />
     <div className={styles.userStatus}>
       {userStatus ? `出勤中` : `退勤中`}
       <button
-      onClick={(e) => setUserStatus(!userStatus)}
+      onClick={(e) => handleChangeStatus(e)}
     >
       {!userStatus ? `出勤` : `退勤`}
     </button>

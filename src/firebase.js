@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
 
 const firebaseConfig = {
@@ -15,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const col = collection(db, "user");
 
 const signUpWithEmailAndPassword = async (email, password) => {
   try {
@@ -55,4 +56,4 @@ const logOut = async () => {
   }
 }
 
-export { db, auth, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
+export { db, auth, col, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
