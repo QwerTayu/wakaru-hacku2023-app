@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { auth, db, logInWithEmailAndPassword,col } from "@/firebase";
+import { auth, logInWithEmailAndPassword,col } from "@/firebase";
 import FormContent from '@/components/FormContent';
 import router from 'next/router'
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
-import { sendEmailVerification } from 'firebase/auth';
+import { doc, getDocs, setDoc } from 'firebase/firestore';
 
 
 function signIn() {

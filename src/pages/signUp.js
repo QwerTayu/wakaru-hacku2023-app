@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { auth, col, signUpWithEmailAndPassword } from "@/firebase";
+import { signUpWithEmailAndPassword } from "@/firebase";
 import FormContent from '@/components/FormContent';
 import router from 'next/router'
-import { doc, getDocs, setDoc } from 'firebase/firestore';
 
 function signUp() {
     const [newEmail, setNewEmail] = useState('');

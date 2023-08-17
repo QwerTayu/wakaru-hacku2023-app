@@ -1,8 +1,8 @@
 import { InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import { db, col, auth } from "@/firebase";
-import { collection, doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+import { col, auth } from "@/firebase";
+import {  doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
 
 import UserPosition from './UserPosition';
 

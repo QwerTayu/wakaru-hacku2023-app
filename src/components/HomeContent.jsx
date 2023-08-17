@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Content.module.css'
 import UserInfo from "@/components/UserInfo";
-import { doc, getDoc, onSnapshot, updateDoc, } from "firebase/firestore";
+import { doc,  onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 
 function HomeContent() {
