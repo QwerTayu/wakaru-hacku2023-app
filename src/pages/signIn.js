@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { auth, db, logInWithEmailAndPassword, logOut } from "@/firebase";
+import { auth, db, logInWithEmailAndPassword,col } from "@/firebase";
 import FormContent from '@/components/FormContent';
 import router from 'next/router'
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
 
 function signIn() {
@@ -14,24 +14,22 @@ function signIn() {
         e.preventDefault();
         const user = await logInWithEmailAndPassword(email, password);
         if (user) { 
-            
-            const querySnapshot = await getDocs(collection(db, "user"));
-            querySnapshot.forEach((doc) => {
-              if( doc.data().userId === auth.currentUser.uid){
+            console.log(doc(col, "XM2I17YCZfEECpYJvMzx"));
+            const querySnapshot = await getDocs(col);
+            querySnapshot.forEach((user) => {
+              if( user.id === auth.currentUser.uid){
                   isExits = true;
-                  console.log("Document data Found:", doc.data().username);
+                  console.log("Yeess"+user.id);
               }
             });
             if (!isExits) { // ユーザーが存在しない場合は作成
                 try {
-                    const docRef = await addDoc(collection(db, "user"), {
-                        userId: auth.currentUser.uid,
+                    await setDoc(doc(col, auth.currentUser.uid), {
                         username: auth.currentUser.email,
                         isInOffice: true,
                         placeLat: 35,
                         placeLng: 135,
                     });
-                    console.log("Document written with ID: ", docRef.id);
                 } catch (e) {
                     console.error("Error adding document: ", e);
                 }
