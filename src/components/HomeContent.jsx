@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import styles from './Content.module.css'
 import UserInfo from "@/components/UserInfo";
-import { doc, } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 
 function HomeContent() {
 
   const [userStatus, setUserStatus] = useState(false)
 
+  const docRef = doc(col, auth.currentUser.uid);
+  
   const handleChangeStatus = (e) => {
-    setUserStatus(!userStatus)
+    updateDoc(docRef, {isInOffice: !userStatus})
   };
 
-  const querySnapshot = doc(col, auth.currentUser.uid);
-  console.log(querySnapshot.id);
+  onSnapshot(docRef, (doc) => {
+      setUserStatus(doc.data().isInOffice);
+  });
 
   return (
     <div className={styles.container}>
