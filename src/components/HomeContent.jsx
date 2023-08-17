@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from './Content.module.css'
 import UserInfo from "@/components/UserInfo";
+import { doc, } from "firebase/firestore";
+import { auth, col } from "@/firebase";
 
 function HomeContent() {
 
@@ -10,7 +12,8 @@ function HomeContent() {
     setUserStatus(!userStatus)
   };
 
-  
+  const querySnapshot = doc(col, auth.currentUser.uid);
+  console.log(querySnapshot.id);
 
   return (
     <div className={styles.container}>
