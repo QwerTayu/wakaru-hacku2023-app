@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
+import router from 'next/router';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -22,7 +23,10 @@ const signUpWithEmailAndPassword = async (email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     await sendEmailVerification(auth.currentUser);    
     
-    alert("user created successfully")
+    if (auth.currentUser.emailVerified) {
+    } else {
+      await signOut(auth);
+    };
 
     return user;
   } catch (error) {
@@ -34,13 +38,18 @@ const signUpWithEmailAndPassword = async (email, password) => {
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-
-    alert("user signed in successfully")
-
-    return user;
+    if (auth.currentUser.emailVerified) {
+      router.push('/home');
+      return user;
+    } else {
+      // await sendEmailVerification(auth.currentUser);
+      await signOut(auth);
+      router.push('/');
+      return false;
+    }
   } catch (error) {
     alert("failed to sign in user");
-    console.log(error);
+    console.log("エラー：", error);
   }
 }
 
@@ -49,7 +58,6 @@ const logOut = async () => {
   try {
     await signOut(auth);
     console.log(auth.currentUser);
-    alert("user signed out successfully")
   } catch (error) {
     alert("failed to sign out user");
     console.log(error);
