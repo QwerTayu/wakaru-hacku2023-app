@@ -42,16 +42,52 @@ const logInWithEmailAndPassword = async (email, password) => {
       router.push('/home');
       return user;
     } else {
-      // await sendEmailVerification(auth.currentUser);
+      await reSendVerifyMail(user.user)
       await signOut(auth);
-      router.push('/');
-      return false;
     }
+    router.push('/');
+    return false;
   } catch (error) {
-    alert("failed to sign in user");
-    console.log("エラー：", error);
+    switch (error.code) {
+      case "auth/user-not-found":
+        await signOut(auth);
+        alert("ユーザが存在しません。");
+        return false;
+      case "auth/invalid-email":
+        await signOut(auth);
+        alert("メールアドレスの形式が正しくありません。");
+        return false;
+      case "auth/wrong-password":
+        await signOut(auth);
+        alert("パスワードが間違っています。");
+	      return false;
+      default:
+        await signOut(auth);
+        alert("ログインに失敗しました。");
+        return false;
+    }
   }
 }
+
+async function reSendVerifyMail(user) {
+  try {
+    if (user) {
+      await sendEmailVerification(user);
+      alert("認証メールを再送信しました。確認してください。");
+    }
+    return
+  } catch (error) {
+    switch (error.code) {
+      case "auth/too-many-requests":
+        alert("1分以内に複数回送信することはできません。時間をおいて再度お試しください。") 
+        // 1分以内は再送できずこのエラーになる.その時の処理.
+	    break
+      default:
+        // その他のメール送信失敗時の処理
+    }
+    return
+  }
+};
 
 
 const logOut = async () => {
