@@ -17,7 +17,7 @@ export default function Index() {
     <div className={styles.main}>
       <div>こんなアプリですよ～</div>
       <hr />
-      <Link href="signUp">使ってみる→</Link>
+      <Link href="signIn">使ってみる→</Link>
     </div>
     </>
   )
