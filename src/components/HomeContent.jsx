@@ -8,6 +8,7 @@ function HomeContent() {
 
   const [userStatus, setUserStatus] = useState(false);
   const [archivePlace, setArchivePlace] = useState({Lat: 0, Lng: 0});
+  const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
 
   const docRef = doc(col, auth.currentUser.uid);
   
@@ -32,6 +33,7 @@ function HomeContent() {
 
   onSnapshot(docRef, (doc) => {
       setUserStatus(doc.data().isInOffice);
+      setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
   });
 
   return (
@@ -45,7 +47,7 @@ function HomeContent() {
         {!userStatus ? `出勤` : `退勤`}
         </button>
         <h3>退勤予定時刻</h3>
-        <p className={styles.goHomeTime}>12:00:00</p>
+        <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
       </div>
     </div>
   )
