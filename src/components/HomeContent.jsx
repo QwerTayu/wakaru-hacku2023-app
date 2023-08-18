@@ -6,12 +6,28 @@ import { auth, col } from "@/firebase";
 
 function HomeContent() {
 
-  const [userStatus, setUserStatus] = useState(false)
+  const [userStatus, setUserStatus] = useState(false);
+  const [archivePlace, setArchivePlace] = useState({Lat: 0, Lng: 0});
 
   const docRef = doc(col, auth.currentUser.uid);
   
   const handleChangeStatus = (e) => {
     updateDoc(docRef, {isInOffice: !userStatus})
+    
+    if (userStatus) {
+      getDoc(docRef).then((doc) => {
+        setArchivePlace({Lat: doc.data().placeLat, Lng: doc.data().placeLng});
+      });
+
+      updateDoc(docRef, {
+        archiveLat: archivePlace.Lat,
+        archiveLng: archivePlace.Lng,
+      });
+
+      updateDoc(docRef, {isInOffice: false});
+    } else {
+      updateDoc(docRef, {isInOffice: true});
+    };
   };
 
   onSnapshot(docRef, (doc) => {

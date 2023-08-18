@@ -29,7 +29,10 @@ function signIn() {
                         isInOffice: false,
                         placeLat: 35,
                         placeLng: 135,
-                        outTime: 1220,
+                        outTimeHour: 12,
+                        outTimeMinute: 20,
+                        archiveLat: 35,
+                        archiveLng: 135,
                     });
                 } catch (e) {
                     console.error("Error adding document: ", e);
