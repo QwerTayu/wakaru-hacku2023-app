@@ -12,8 +12,10 @@ export default function PlaceInfo () {
 
     const docRef = doc(col, auth.currentUser.uid);
     
-    // updateDoc(docRef, {placeLat: UserPosition().latitude});
-    // updateDoc(docRef, {placeLng: UserPosition().longitude});
+    const userPositionValue = UserPosition();
+
+    updateDoc(docRef, {placeLat: userPositionValue.latitude});
+    updateDoc(docRef, {placeLng: userPositionValue.longitude});
 
     useEffect(() => {
         // データベースからデータを取得する
