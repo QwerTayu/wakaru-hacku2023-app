@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Content.module.css'
 import UserInfo from "@/components/UserInfo";
-import { doc,  onSnapshot, updateDoc, } from "firebase/firestore";
+import { doc,  getDoc,  onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 
 function HomeContent() {
@@ -13,9 +13,11 @@ function HomeContent() {
   const docRef = doc(col, auth.currentUser.uid);
   
   const handleChangeStatus = (e) => {
-    updateDoc(docRef, {isInOffice: !userStatus})
     
     if (userStatus) {
+
+      updateDoc(docRef, {isInOffice: false});
+      
       getDoc(docRef).then((doc) => {
         setArchivePlace({Lat: doc.data().placeLat, Lng: doc.data().placeLng});
       });
@@ -25,10 +27,11 @@ function HomeContent() {
         archiveLng: archivePlace.Lng,
       });
 
-      updateDoc(docRef, {isInOffice: false});
+      
     } else {
       updateDoc(docRef, {isInOffice: true});
     };
+
   };
 
   onSnapshot(docRef, (doc) => {
