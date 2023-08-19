@@ -53,7 +53,7 @@ function HomeContent() {
           </button>
         </div>
         <p className={styles.goHomeFont}>退勤予定時刻</p>
-        <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
+      <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
       </div>
     </div>
   )

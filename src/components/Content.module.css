@@ -99,7 +99,7 @@
     height: auto;
 }
 
-.member img {
+.face {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -125,15 +125,4 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-<<<<<<< HEAD
-=======
-}
-
-.member .faceWrapper {
-    background-color: black;
-}
-
-.member .face {
-    opacity: 0.7;
->>>>>>> development
 }
