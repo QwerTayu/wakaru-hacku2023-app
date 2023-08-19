@@ -13,8 +13,8 @@ function UserInfo() {
 
   return (
     <div className="user-info">
-        <img src="/userIcon.jpg" alt="avatar" />
-        <p className={styles.organizaion}>明石高専</p>
+        <img src="/userIcon.jpg" alt="avatar" className={styles.userImage}/>
+        <p className={styles.userOrganization}>明石高専</p>
         <p className={styles.userName}>{name}</p>
     </div>
   );

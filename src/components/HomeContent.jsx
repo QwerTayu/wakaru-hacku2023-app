@@ -41,16 +41,19 @@ function HomeContent() {
 
   return (
     <div className={styles.container}>
-      <UserInfo />
+    <UserInfo />
       <div className={styles.userStatus}>
-        {userStatus ? `出勤中` : `退勤中`}
-        <button
-        onClick={(e) => handleChangeStatus(e)}
-      >
-        {!userStatus ? `出勤` : `退勤`}
-        </button>
-        <h3>退勤予定時刻</h3>
-        <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
+        <div className={styles.userAttendStatus}>
+          {userStatus ? `出勤中` : `退勤中`}
+          <button
+          onClick={(e) => setUserStatus(!userStatus)}
+          className={styles.userAttendButton}
+          >
+          {!userStatus ? `出勤` : `退勤`}
+          </button>
+        </div>
+        <p className={styles.goHomeFont}>退勤予定時刻</p>
+      <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
       </div>
     </div>
   )

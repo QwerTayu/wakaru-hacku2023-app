@@ -23,7 +23,7 @@ function StatusContent() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.organizaion}>明石高専</p>
+      <p className={styles.statusOrganization}>明石高専</p>
       <div className={styles.members}>
         {users.map((user) => (
           <div key={user.username} className={styles.member}>
