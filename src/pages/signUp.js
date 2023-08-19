@@ -12,7 +12,10 @@ function signUp() {
         const user = await signUpWithEmailAndPassword(newEmail, newPassword);
         console.log(user);
         if (user) {  
+            console.log(user);
+            
             await router.push('/signIn')
+        } else {
         }
         setNewEmail('');
         setNewPassword('');
