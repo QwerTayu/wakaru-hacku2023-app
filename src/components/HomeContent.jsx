@@ -9,16 +9,19 @@ function HomeContent() {
   return (
     <div className={styles.container}>
     <UserInfo />
-    <div className={styles.userStatus}>
-      {userStatus ? `出勤中` : `退勤中`}
-      <button
-      onClick={(e) => setUserStatus(!userStatus)}
-    >
-      {!userStatus ? `出勤` : `退勤`}
-    </button>
-    <h3>退勤予定時刻</h3>
-    <p className={styles.goHomeTime}>12:00:00</p>
-    </div>
+      <div className={styles.userStatus}>
+        <div className={styles.userAttendStatus}>
+          {userStatus ? `出勤中` : `退勤中`}
+          <button
+          onClick={(e) => setUserStatus(!userStatus)}
+          className={styles.userAttendButton}
+          >
+          {!userStatus ? `出勤` : `退勤`}
+          </button>
+        </div>
+        <p className={styles.goHomeFont}>退勤予定時刻</p>
+        <p className={styles.goHomeTime}>12:00:00</p>
+      </div>
     </div>
   )
 }

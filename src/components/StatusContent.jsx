@@ -27,11 +27,11 @@ function StatusContent() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.organizaion}>明石高専</p>
+      <p className={styles.statusOrganization}>明石高専</p>
       <div className={styles.members}>
         {members.map((member) => (
           <div key={member.name} className={styles.member}>
-            <img src={member.icon} alt="" />
+            <img src={member.icon} alt=""/>
             <p>{member.name}</p>
           </div>
         ))}
