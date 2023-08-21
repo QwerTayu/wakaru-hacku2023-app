@@ -38,30 +38,33 @@ export default function PlaceInfo () {
     return (
         <>
             {users.filter((user) => user.isInOffice === true).map((user) => (
-                <MarkerF
-                key={user.id}
-                position={{
-                    lat: user.placeLat,
-                    lng: user.placeLng,
-                }}
-                icon={{
-                    url: "/userIcon.jpg",
-                    origin: new window.google.maps.Point(0, 0),
-                    anchor: new window.google.maps.Point(15, 15),
-                    scaledSize: new window.google.maps.Size(30, 30),
-                }}
-                />
-                // <InfoWindowF
-                //     key={user.id}
-                //     position={{
-                //         lat: user.placeLat,
-                //         lng: user.placeLng,
-                //     }}
-                // >
-                //     <div className={styles.markerWindow}>
-                //         <h1>{user.username}</h1>
-                //     </div>
-                // </InfoWindowF>
+                <>
+                    <MarkerF
+                    key={user.id}
+                    position={{
+                        lat: user.placeLat,
+                        lng: user.placeLng,
+                    }}
+                    icon={{
+                        url: "/userIcon.jpg",
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                        scaledSize: new window.google.maps.Size(30, 30),
+                    }}
+                    />
+                    <InfoWindowF
+                        key={user.id}
+                        position={{
+                            lat: user.placeLat,
+                            lng: user.placeLng,
+                        }}
+                    >
+                        <div className={styles.markerWindow}>
+                            <h1>{user.username.substring(0, 5)}</h1>
+                            <h2>{user.outTimeHour}:{user.outTimeMinute}</h2>
+                        </div>
+                    </InfoWindowF>
+                </>
             ))}
         </>
     );
