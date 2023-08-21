@@ -5,6 +5,7 @@ import { col, auth } from "@/firebase";
 import {  doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
 
 import UserPosition from './UserPosition';
+import StopSharing from "@/components/StopSharing";
 
 export default function PlaceInfo () {
 
@@ -32,6 +33,7 @@ export default function PlaceInfo () {
 
     }, []);
 
+    StopSharing(users);
 
     return (
         <>

@@ -66,6 +66,9 @@
     top: 200px;
 }
 
+
+/* HomeContentについて */
+
 .goHomeFont {
     font-size: 40px;
     letter-spacing: 3px;
@@ -125,4 +128,30 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.goHome {
+    background-color: #3cb7ff;  /* とりま適当に設定してます */
+}
+
+.goHomeTimeHour{
+    background: red; /* とりま適当に設定してます */
+    padding: 5px; /* とりま適当に設定してます */
+    display: flex;
+    flex-direction: column;
+}
+
+.goHomeTimeMinute{
+    background: blue; /* とりま適当に設定してます */
+    padding: 5px; /* とりま適当に設定してます */
+    display: flex;
+    flex-direction: column;
+}
+
+.goHomeTimeUp {
+    color: white; /* とりま適当に設定してます */
+}
+
+.goHomeTimeDown {
+    color: white; /* とりま適当に設定してます */
 }

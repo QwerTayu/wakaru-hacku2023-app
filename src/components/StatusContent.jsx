@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Content.module.css'
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
-import { db } from '@/firebase';
+import { getDocs, onSnapshot } from 'firebase/firestore';
+import { col, db } from '@/firebase';
 import StopSharing from '@/components/StopSharing';
 
 function StatusContent() {
@@ -10,7 +10,7 @@ function StatusContent() {
 
   useEffect(() => {
       // データベースからデータを取得する
-      const userData = collection(db, "user");
+      const userData = col;
       getDocs(userData).then((snapShot) => {
           // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
           setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
