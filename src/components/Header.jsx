@@ -7,7 +7,7 @@ function Header() {
     <div className={styles.header}>
       WAKARU
       <button type={'button'} onClick={logOut} className={styles.logout}>Logout</button>
-      <Link href="/Account">
+      <Link href="/account">
         アカウント
       </Link>
     </div>

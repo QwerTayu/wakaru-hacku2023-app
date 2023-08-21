@@ -10,10 +10,15 @@ function HomeContent() {
   const [userStatus, setUserStatus] = useState(false);
   const [archivePlace, setArchivePlace] = useState({Lat: 0, Lng: 0});
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
+  const [users, setUsers] = useState([]);
 
   const docRef = doc(col, auth.currentUser.uid);
   
-  const [users, setUsers] = useState([]);
+
+  onSnapshot(docRef, (doc) => {
+    setUserStatus(doc.data().isInOffice);
+    setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
+  });
 
   useEffect(() => {
       // データベースからデータを取得する
@@ -52,11 +57,6 @@ function HomeContent() {
     };
 
   };
-
-  onSnapshot(docRef, (doc) => {
-      setUserStatus(doc.data().isInOffice);
-      setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
-  });
 
   const handleClickUp = (e) => {
     const time = e.target.parentNode.className;
