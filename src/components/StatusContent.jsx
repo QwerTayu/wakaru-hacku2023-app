@@ -39,7 +39,7 @@ function StatusContent() {
                 <img src='/userIcon.jpg' alt="" className={styles.face}/>
               </p>
             }
-            <p>{user.username}</p>
+            <p>{user.username.substring(0, 5)}</p>
             <p>{user.outTimeHour}:{user.outTimeMinute}</p>
           </div>
         ))}
