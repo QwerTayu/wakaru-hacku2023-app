@@ -13,9 +13,8 @@ function signUp() {
         console.log(user);
         if (user) {  
             console.log(user);
-            
+            alert('登録メールアドレスに確認メールを送信しました。');
             await router.push('/signIn')
-        } else {
         }
         setNewEmail('');
         setNewPassword('');
