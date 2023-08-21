@@ -15,7 +15,7 @@ function UserInfo() {
     <div className="user-info">
         <img src="/userIcon.jpg" alt="avatar" className={styles.userImage}/>
         <p className={styles.userOrganization}>明石高専</p>
-        <p className={styles.userName}>{name}</p>
+        <p className={styles.userName}>{name.substring(0, 5)}</p>
     </div>
   );
 }
