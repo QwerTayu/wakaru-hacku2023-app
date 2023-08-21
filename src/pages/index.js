@@ -15,9 +15,19 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     <div className={styles.main}>
-      <div>こんなアプリですよ～</div>
+      <div>WAKARU</div>
       <hr />
-      <Link href="signIn">使ってみる→</Link>
+      <Link href="signIn">サインイン</Link>
+      <h3 className={styles.notes}>注意事項</h3>
+      <ul className={styles.note}>
+        <li>このサービスは現在開発中です</li>
+        <li>ページ右上の「アカウント」ボタンからアカウントデータの削除を行えます</li>
+        <li>登録メールアドレスの最初のｎ文字がユーザー名として表示されます</li>
+        <li>開発者は予告なくユーザのアカウントデータを削除します</li>
+        <li>開発者は予告なくサービスを停止します</li>
+        <li>開発者は予告なくサービスを変更します</li>
+        <li>開発者は予告なくサービスを終了します</li>
+      </ul>
     </div>
     </>
   )
