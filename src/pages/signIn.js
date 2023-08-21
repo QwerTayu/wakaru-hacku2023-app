@@ -25,6 +25,7 @@ function signIn() {
             if (!isExits) { // ユーザーが存在しない場合は作成
                 try {
                     await setDoc(doc(col, auth.currentUser.uid), {
+                        id: auth.currentUser.uid,
                         username: auth.currentUser.email,
                         isInOffice: false,
                         placeLat: 35,
