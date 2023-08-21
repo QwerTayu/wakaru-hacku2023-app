@@ -7,6 +7,7 @@ export default function Document() {
         <link href='https://fonts.googleapis.com/css?family=Krona One' rel="stylesheet" />
         <link href='https://fonts.googleapis.com/css?family=Gravitas One' rel="stylesheet" />
         <link href='https://fonts.googleapis.com/css?family=Noto+Serif+JP' rel='stylesheet' />
+        <link rel='manifest' href='/manifest.json' />
       </Head>
       <body>
         <Main />
