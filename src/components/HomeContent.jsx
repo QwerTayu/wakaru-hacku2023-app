@@ -12,6 +12,24 @@ function HomeContent() {
 
   const docRef = doc(col, auth.currentUser.uid);
   
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+      // データベースからデータを取得する
+      const userData = col;
+      getDocs(userData).then((snapShot) => {
+          // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
+          setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
+
+          // リアルタイムで取得
+          onSnapshot(userData, (user) => {
+              setUsers(user.docs.map((doc) => ({ ...doc.data() })));
+          });
+      });
+  }, []);
+
+  StopSharing(users);
+
   const handleChangeStatus = (e) => {
     
     if (userStatus) {
