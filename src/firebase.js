@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { collection, getFirestore } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
-import router from 'next/router';
+import { collection, deleteDoc, doc, getFirestore } from "firebase/firestore";
+import { createUserWithEmailAndPassword, deleteUser, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
+import { router } from "next/router";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -100,4 +100,22 @@ const logOut = async () => {
   }
 }
 
-export { db, auth, col, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
+const deleteDocument = async () => {
+  try {
+    await deleteDoc(doc(db, "user", auth.currentUser.uid));
+  } catch (error) {
+    alert("failed to delete doc");
+    console.log(error);
+  }
+}
+
+const deleteAccount = async () => {
+  try {
+    await deleteUser(auth.currentUser);
+  } catch (error) {
+    alert("failed to delete account");
+    console.log(error);
+  }
+}
+
+export { db, auth, col, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut, deleteDocument, deleteAccount };
