@@ -2,7 +2,7 @@
     "name": "WAKARU",
     "short_name": "WAKARU",
     "description": "for all TEAMS",
-    "start_url": "/",
+    "start_url": "/home",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
