@@ -40,6 +40,7 @@ function StatusContent() {
               </p>
             }
             <p>{user.username}</p>
+            <p>{user.outTimeHour}:{user.outTimeMinute}</p>
           </div>
         ))}
       </div>
