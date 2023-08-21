@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './Content.module.css'
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '@/firebase';
+import StopSharing from '@/components/StopSharing';
 
 function StatusContent() {
 
@@ -20,6 +21,8 @@ function StatusContent() {
           });
       });
   }, []);
+
+  StopSharing(users);
 
   return (
     <div className={styles.container}>
