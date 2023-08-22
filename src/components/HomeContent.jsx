@@ -4,6 +4,7 @@ import UserInfo from "@/components/UserInfo";
 import { doc,  getDoc,  getDocs,  onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 import StopSharing from "@/components/StopSharing";
+import { router } from "next/router";
 
 function HomeContent() {
 
@@ -12,13 +13,17 @@ function HomeContent() {
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
 
-  const docRef = doc(col, auth.currentUser.uid);
-  
+  try {
+    const docRef = doc(col, auth.currentUser.uid);
+    onSnapshot(docRef, (doc) => {
+      setUserStatus(doc.data().isInOffice);
+      setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
+    });
+  } catch (error) {
+    router.reload();
+  };
 
-  onSnapshot(docRef, (doc) => {
-    setUserStatus(doc.data().isInOffice);
-    setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
-  });
+
 
   useEffect(() => {
       // データベースからデータを取得する
