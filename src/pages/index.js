@@ -15,7 +15,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     <div className={styles.main}>
-      <div>WAKARU</div>
+      <h1>WAKARU</h1>
       <hr />
       <Link href="signIn">サインイン</Link>
       <h3 className={styles.notes}>注意事項</h3>

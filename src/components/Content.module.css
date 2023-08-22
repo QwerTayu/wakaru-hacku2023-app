@@ -1,3 +1,5 @@
+/* 全体用 */
+
 .container {
     font-family: "UD デジタル 教科書体 NK-R","UD Digi Kyokasho NK-R";
     display: flex;
@@ -9,47 +11,66 @@
     background-color: white;
 }
 
-.statusOrganization {
-    font-size: 40px;
-    font-family: "UD デジタル 教科書体 NP-B","UD Digi Kyokasho NP-B";
-    position: absolute;
-    left: 300px;
-    top: 170px;
+/* Homeページ用 */
+
+@media screen and (min-width: 900px) {
+    .homeContainer {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+.userInfo {
+    display: block;
+    width: 400px;
+    height: 400px;
+}
+
+.userImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(50%);
+    margin-top: 30px;
 }
 
 .userOrganization {
     font-size: 40px;
-    position: absolute;
-    left: 380px;
-    bottom: 230px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .userName {
     font-size: 30px;
     font-family: Arial;
-    position: absolute;
-    left: 320px;
-    bottom: 180px;
-}
-
-.userImage {
-    border-radius: 50%;
-    position: absolute;
-    left: 330px;
-    top: 150px;
-    width: 250px;
-    height: 250px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .userStatus {
     font-size: 12px;
+    width: 400px;
+    height: 400px;
+    display: inline-block;
 }
 
 .userAttendStatus {
     font-size: 35px;
-    position: absolute;
-    right: 380px;
-    top: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    margin-top: 40px;
+}
+
+.userAttendText {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .userAttendButton {
@@ -60,24 +81,56 @@
     color: white;
     border-radius: 20%;
     width: 100px;
-    height: 100px;
-    margin: 30px;
-    right: 380px;
-    top: 200px;
+    height: 100%;
 }
-
-
-/* HomeContentについて */
 
 .goHomeFont {
     font-size: 40px;
     letter-spacing: 3px;
     text-align: center;
-    position: absolute;
-    right: 395px;
-    bottom: 310px;
     background: linear-gradient(transparent 80%, #88d3ff 30%);
-    width: 270px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.goHome {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.goHomeTimeHour{
+    padding: 5px; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+}
+
+.goHomeTimeMinute{
+    padding: 5px; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+}
+
+.goHomeTimeUp {
+    color: black; 
+    height: 45%;
+    width: 100%;
+    margin: auto;
+    font-size: 4em;
+}
+
+.goHomeTimeDown {
+    color: black; 
+    height: 45%;
+    width: 100%;
+    margin: auto;
+    font-size: 4em;
 }
 
 .goHomeTime {
@@ -85,16 +138,13 @@
     font-size: 40px;
     font-weight: bold;
     text-align: center;
-    padding: 30px;
-    position: absolute;
     background-color: #3cb7ff;
-    border-radius: 270px/400px;
-    width: 270px;
-    height: 100px;
-    right: 390px;
-    bottom: 180px;
+    border-radius: 270px/270px;
     box-shadow: 2px 2px 2px #002991;
     color: white;
+    width: 60%;
+    height: 100%;
+    padding: 50px;
 }
 
 .member {
@@ -130,28 +180,12 @@
     width: 100%;
 }
 
-.goHome {
-    background-color: #3cb7ff;  /* とりま適当に設定してます */
-}
 
-.goHomeTimeHour{
-    background: red; /* とりま適当に設定してます */
-    padding: 5px; /* とりま適当に設定してます */
-    display: flex;
-    flex-direction: column;
-}
 
-.goHomeTimeMinute{
-    background: blue; /* とりま適当に設定してます */
-    padding: 5px; /* とりま適当に設定してます */
-    display: flex;
-    flex-direction: column;
-}
-
-.goHomeTimeUp {
-    color: white; /* とりま適当に設定してます */
-}
-
-.goHomeTimeDown {
-    color: white; /* とりま適当に設定してます */
+.statusOrganization {
+    font-size: 40px;
+    font-family: "UD デジタル 教科書体 NP-B","UD Digi Kyokasho NP-B";
+    position: absolute;
+    left: 300px;
+    top: 170px;
 }

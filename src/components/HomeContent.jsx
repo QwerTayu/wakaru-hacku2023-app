@@ -96,47 +96,49 @@ function HomeContent() {
 
   return (
     <div className={styles.container}>
-    <UserInfo />
-      <div className={styles.userStatus}>
-        <div className={styles.userAttendStatus}>
-          {userStatus ? `出勤中` : `退勤中`}
-          <button
-          onClick={(e) => handleChangeStatus(e)}
-          className={styles.userAttendButton}
-          >
-          {!userStatus ? `出勤` : `退勤`}
-          </button>
-        </div>
-        <div className={styles.goHome}>
-          <p className={styles.goHomeFont}>退勤予定時刻</p>
-          <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
-          <div className={styles.goHomeTimeHour}> {/* ここのクラス名変更禁止 */}
-            <button 
-              onClick={(e) => handleClickUp(e)}
-              className={styles.goHomeTimeUp}
+      <div className={styles.homeContainer}>
+        <UserInfo />
+        <div className={styles.userStatus}>
+          <div className={styles.userAttendStatus}>
+            <p className={styles.userAttendText}>{userStatus ? `出勤中` : `退勤中`}</p>
+            <button
+            onClick={(e) => handleChangeStatus(e)}
+            className={styles.userAttendButton}
             >
-              ▲
-            </button>
-            <button 
-              onClick={(e) => handleClickDown(e)}
-              className={styles.goHomeTimeDown}
-            >
-              ▼
+            {!userStatus ? `出勤` : `退勤`}
             </button>
           </div>
-          <div className={styles.goHomeTimeMinute}> {/* ここのクラス名変更禁止 */}
-            <button 
-              onClick={(e) => handleClickUp(e)}
-              className={styles.goHomeTimeUp}
-            >
-              ▲
-            </button>
-            <button 
-              onClick={(e) => handleClickDown(e)}
-              className={styles.goHomeTimeDown}
-            >
-              ▼
-            </button>
+          <p className={styles.goHomeFont}>退勤予定時刻</p>
+          <div className={styles.goHome}>
+            <div className={styles.goHomeTimeHour}> {/* ここのクラス名変更禁止 */}
+              <button 
+                onClick={(e) => handleClickUp(e)}
+                className={styles.goHomeTimeUp}
+              >
+                ▲
+              </button>
+              <button 
+                onClick={(e) => handleClickDown(e)}
+                className={styles.goHomeTimeDown}
+              >
+                ▼
+              </button>
+            </div>
+            <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
+            <div className={styles.goHomeTimeMinute}> {/* ここのクラス名変更禁止 */}
+              <button 
+                onClick={(e) => handleClickUp(e)}
+                className={styles.goHomeTimeUp}
+              >
+                ▲
+              </button>
+              <button 
+                onClick={(e) => handleClickDown(e)}
+                className={styles.goHomeTimeDown}
+              >
+                ▼
+              </button>
+            </div>
           </div>
         </div>
       </div>
