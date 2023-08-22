@@ -1,17 +1,24 @@
 import { auth, col } from "@/firebase";
 import styles from "./Content.module.css";
-import { doc, getDoc } from "firebase/firestore";
-import { useState } from "react";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 function UserInfo() {
   const [name, setName] = useState("");
 
-  if (auth.currentUser) {
-    const docRef = doc(col, auth.currentUser.uid);
-    getDoc(docRef).then((doc) => {
-      setName(doc.data().username);
-    });
-  }
+  useEffect(() => {
+    if (auth.currentUser) {
+      const docRef = doc(col, auth.currentUser.uid);
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        if (doc.exists()) {
+          setName(doc.data().username);
+        } else {
+          setName("No such document!");
+        }
+      });
+      return () => unsubscribe();
+    };
+  }, [auth.currentUser]);
 
   return (
     <div className={styles.userInfo}>
