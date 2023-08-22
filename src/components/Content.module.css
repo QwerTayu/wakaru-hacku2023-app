@@ -27,7 +27,7 @@
     .userInfo {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 350px;
         height: 400px;
     }
 }
@@ -46,7 +46,7 @@
     .userInfo {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 350px;
         height: 400px;
     } 
 }
