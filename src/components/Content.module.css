@@ -9,6 +9,8 @@
     height: calc(100% - 160px); 
     width: 100%;
     background-color: white;
+    overflow-y: scroll;
+    padding-top: 80px;
 }
 
 /* Homeページ用 */
