@@ -26,7 +26,7 @@ function StatusContent() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.statusOrganization}>明石高専</p>
+      <p className={styles.statusOrganization}>MuTech開発部(笑)</p>
       <div className={styles.members}>
         {users.map((user) => (
           <div key={user.username} className={styles.member}>
@@ -36,11 +36,13 @@ function StatusContent() {
               </p>
             : 
               <p className={styles.faceWrapper}>
-                <img src='/userIcon.png' alt="" className={styles.face}/>
+                <img src='/userIcon.png' alt="" className={styles.faceWrapped}/>
               </p>
             }
-            <p>{user.username.substring(0, 5)}</p>
-            <p>{user.outTimeHour}:{user.outTimeMinute}</p>
+            <div className={styles.memberInfo}>
+              <p>{user.username.substring(0, 5)}</p>
+              <p>{user.outTimeHour}:{user.outTimeMinute}</p>
+            </div>
           </div>
         ))}
       </div>

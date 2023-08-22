@@ -5,13 +5,17 @@ import { logOut } from "@/firebase";
 function Header() {
   return (
     <div className={styles.header}>
-      WAKARU
-      <button type={'button'} onClick={logOut} className={styles.logout}>Logout</button>
-      <Link href="/account">
-        アカウント
-      </Link>
+      <p>WAKARU</p>
+      <div className={styles.buttons}>
+        <button type={'button'} onClick={logOut} className={styles.logout}>Logout</button>
+        <Link href="/setting" legacyBehavior>
+          <a className={styles.setting}>
+            <img src="/userIcon.png" alt="Setting" />
+          </a>
+        </Link>
+      </div>
     </div>
-    );
+  );
 }
 
 export default Header;
