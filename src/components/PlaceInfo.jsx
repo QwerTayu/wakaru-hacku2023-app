@@ -46,10 +46,10 @@ export default function PlaceInfo () {
                         lng: user.placeLng,
                     }}
                     icon={{
-                        url: "/userIcon.jpg",
+                        url: "/userIcon.png",
                         origin: new window.google.maps.Point(0, 0),
-                        anchor: new window.google.maps.Point(15, 15),
-                        scaledSize: new window.google.maps.Size(30, 30),
+                        anchor: new window.google.maps.Point(30, 30),
+                        scaledSize: new window.google.maps.Size(60, 60),
                     }}
                     />
                     <InfoWindowF
