@@ -32,11 +32,11 @@ function StatusContent() {
           <div key={user.username} className={styles.member}>
             { user.isInOffice ?
               <p>
-                <img src='/userIcon.jpg' alt="" className={styles.face}/>
+                <img src='/userIcon.png' alt="" className={styles.face}/>
               </p>
             : 
               <p className={styles.faceWrapper}>
-                <img src='/userIcon.jpg' alt="" className={styles.face}/>
+                <img src='/userIcon.png' alt="" className={styles.face}/>
               </p>
             }
             <p>{user.username.substring(0, 5)}</p>
