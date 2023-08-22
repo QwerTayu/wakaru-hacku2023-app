@@ -13,16 +13,13 @@ function HomeContent() {
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
 
-  try {
+  if (auth.currentUser) {
     const docRef = doc(col, auth.currentUser.uid);
     onSnapshot(docRef, (doc) => {
       setUserStatus(doc.data().isInOffice);
       setGoHomeTime({hour: doc.data().outTimeHour, minute: doc.data().outTimeMinute});
     });
-  } catch (error) {
-    router.reload();
   };
-
 
 
   useEffect(() => {
