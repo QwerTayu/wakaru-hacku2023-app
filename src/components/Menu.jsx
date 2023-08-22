@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./Menu.module.css";
 
 function Menu() {
+  var url = location.href;
   return (
     <div className={styles.menu}>
       <Link href="home">

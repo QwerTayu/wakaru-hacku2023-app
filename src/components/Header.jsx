@@ -5,10 +5,11 @@ import { logOut } from "@/firebase";
 function Header() {
   return (
     <div className={styles.header}>
-      Header
-      <div className={styles.logout}>
-          <button type={'button'} onClick={logOut}>ログアウト</button>
-      </div>
+      WAKARU
+      <button type={'button'} onClick={logOut} className={styles.logout}>Logout</button>
+      <Link href="/account">
+        アカウント
+      </Link>
     </div>
     );
 }

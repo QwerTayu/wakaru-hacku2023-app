@@ -2,7 +2,7 @@ import styles from './Content.module.css'
 import PlaceInfo from '@/components/PlaceInfo';
 
 import { GoogleMap, useLoadScript} from '@react-google-maps/api';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -15,12 +15,23 @@ const options = {
   zoomControl: true,
 };
 
-const center = {
-  lat: 35.69575,
-  lng: 139.77521,
-};
+// const center = {
+//   lat: 35.69575,
+//   lng: 139.77521,
+// };
 
 function  MapContent() {
+  const [center, setCenter] = useState({lat: 35.69575, lng: 139.77521});
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setCenter({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }, []);
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY,
     libraries,
@@ -40,7 +51,7 @@ function  MapContent() {
       <GoogleMap
         mapContainerStyle={mapContainerStyle} 
         center={center} 
-        zoom={10}
+        zoom={16}
         options={options}
         onLoad={onMapLoad}
       >

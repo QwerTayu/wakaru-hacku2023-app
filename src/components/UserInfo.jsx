@@ -1,12 +1,21 @@
-import { auth } from "@/firebase";
+import { auth, col } from "@/firebase";
 import styles from "./Content.module.css";
+import { doc, getDoc } from "firebase/firestore";
+import { useState } from "react";
 
 function UserInfo() {
+  const [name, setName] = useState("");
+
+  const docRef = doc(col, auth.currentUser.uid);
+  getDoc(docRef).then((doc) => {
+    setName(doc.data().username);
+  });
+
   return (
     <div className="user-info">
-        <img src={( auth.currentUser.photoURL ? auth.currentUser.photoURL : `https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png` )} alt="avatar" />
-        <p className={styles.organizaion}>明石高専</p>
-        <p className={styles.userName}>{auth.currentUser.email}</p>
+        <img src="/userIcon.jpg" alt="avatar" className={styles.userImage}/>
+        <p className={styles.userOrganization}>明石高専</p>
+        <p className={styles.userName}>{name.substring(0, 5)}</p>
     </div>
   );
 }

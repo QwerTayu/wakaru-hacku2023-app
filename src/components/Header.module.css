@@ -1,9 +1,25 @@
 .header {
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-family: 'Krona One';
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
-    padding-left: 20px;
+    padding-left: 70px;
     background-color: #fff;
+    border-bottom: solid 3px #D9D9D9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logout {
+    font-size: 30px;
+    font-family: 'Gravitas One';
+    background-color: #D9D9D9;
+    border: none;
+    position: absolute;
+    width: 190px;
+    height: 50px;
+    right: 130px;
+    border-radius: 30px;
 }

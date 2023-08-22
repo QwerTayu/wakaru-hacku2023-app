@@ -9,3 +9,26 @@
   justify-content: center;
   height: 100vh;
 }
+
+.notes {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.note {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px #ccc;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.note li {
+  list-style: none;
+}

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
+import { collection, deleteDoc, doc, getFirestore } from "firebase/firestore";
+import { createUserWithEmailAndPassword, deleteUser, getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut, updateCurrentUser } from "firebase/auth";
+import { router } from "next/router";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,13 +16,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const col = collection(db, "user");
 
 const signUpWithEmailAndPassword = async (email, password) => {
   try {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     await sendEmailVerification(auth.currentUser);    
     
-    alert("user created successfully")
+    if (auth.currentUser.emailVerified) {
+    } else {
+      await signOut(auth);
+    };
 
     return user;
   } catch (error) {
@@ -33,26 +38,84 @@ const signUpWithEmailAndPassword = async (email, password) => {
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
-
-    alert("user signed in successfully")
-
-    return user;
+    if (auth.currentUser.emailVerified) {
+      router.push('/home');
+      return user;
+    } else {
+      await reSendVerifyMail(user.user)
+      await signOut(auth);
+    }
+    router.push('/');
+    return false;
   } catch (error) {
-    alert("failed to sign in user");
-    console.log(error);
+    switch (error.code) {
+      case "auth/user-not-found":
+        await signOut(auth);
+        alert("ユーザが存在しません。");
+        return false;
+      case "auth/invalid-email":
+        await signOut(auth);
+        alert("メールアドレスの形式が正しくありません。");
+        return false;
+      case "auth/wrong-password":
+        await signOut(auth);
+        alert("パスワードが間違っています。");
+	      return false;
+      default:
+        await signOut(auth);
+        alert("ログインに失敗しました。");
+        return false;
+    }
   }
 }
+
+async function reSendVerifyMail(user) {
+  try {
+    if (user) {
+      await sendEmailVerification(user);
+      alert("認証メールを再送信しました。確認してください。");
+    }
+    return
+  } catch (error) {
+    switch (error.code) {
+      case "auth/too-many-requests":
+        alert("1分以内に複数回送信することはできません。時間をおいて再度お試しください。") 
+        // 1分以内は再送できずこのエラーになる.その時の処理.
+	    break
+      default:
+        // その他のメール送信失敗時の処理
+    }
+    return
+  }
+};
 
 
 const logOut = async () => {
   try {
     await signOut(auth);
     console.log(auth.currentUser);
-    alert("user signed out successfully")
   } catch (error) {
     alert("failed to sign out user");
     console.log(error);
   }
 }
 
-export { db, auth, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut};
+const deleteDocument = async () => {
+  try {
+    await deleteDoc(doc(db, "user", auth.currentUser.uid));
+  } catch (error) {
+    alert("failed to delete doc");
+    console.log(error);
+  }
+}
+
+const deleteAccount = async () => {
+  try {
+    await deleteUser(auth.currentUser);
+  } catch (error) {
+    alert("failed to delete account");
+    console.log(error);
+  }
+}
+
+export { db, auth, col, signUpWithEmailAndPassword, logInWithEmailAndPassword, logOut, deleteDocument, deleteAccount };

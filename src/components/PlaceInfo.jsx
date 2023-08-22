@@ -1,16 +1,26 @@
 import { InfoWindowF, MarkerF } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import { db } from "@/firebase";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { col, auth } from "@/firebase";
+import {  doc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+
+import UserPosition from './UserPosition';
+import StopSharing from "@/components/StopSharing";
 
 export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
 
+    const docRef = doc(col, auth.currentUser.uid);
+    
+    const userPositionValue = UserPosition();
+
+    updateDoc(docRef, {placeLat: userPositionValue.latitude});
+    updateDoc(docRef, {placeLng: userPositionValue.longitude});
+
     useEffect(() => {
         // データベースからデータを取得する
-        const userData = collection(db, "user");
+        const userData = col;
         getDocs(userData).then((snapShot) => {
             // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
             setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
@@ -20,35 +30,41 @@ export default function PlaceInfo () {
                 setUsers(user.docs.map((doc) => ({ ...doc.data() })));
             });
         });
+
     }, []);
+
+    StopSharing(users);
 
     return (
         <>
             {users.filter((user) => user.isInOffice === true).map((user) => (
-                // <MarkerF
-                // key={user.id}
-                // position={{
-                //     lat: user.placeLat,
-                //     lng: user.placeLng,
-                // }}
-                // icon={{
-                //     url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                //     origin: new window.google.maps.Point(0, 0),
-                //     anchor: new window.google.maps.Point(15, 15),
-                //     scaledSize: new window.google.maps.Size(30, 30),
-                // }}
-                // />
-                <InfoWindowF
+                <>
+                    <MarkerF
                     key={user.id}
                     position={{
                         lat: user.placeLat,
                         lng: user.placeLng,
                     }}
-                >
-                    <div className={styles.markerWindow}>
-                        <h1>{user.username}</h1>
-                    </div>
-                </InfoWindowF>
+                    icon={{
+                        url: "/userIcon.jpg",
+                        origin: new window.google.maps.Point(0, 0),
+                        anchor: new window.google.maps.Point(15, 15),
+                        scaledSize: new window.google.maps.Size(30, 30),
+                    }}
+                    />
+                    <InfoWindowF
+                        key={user.id}
+                        position={{
+                            lat: user.placeLat,
+                            lng: user.placeLng,
+                        }}
+                    >
+                        <div className={styles.markerWindow}>
+                            <h1>{user.username.substring(0, 5)}</h1>
+                            <h2>{user.outTimeHour}:{user.outTimeMinute}</h2>
+                        </div>
+                    </InfoWindowF>
+                </>
             ))}
         </>
     );
