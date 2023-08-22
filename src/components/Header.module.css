@@ -13,11 +13,16 @@
 .title {
     font-family: 'Krona One';
     margin-left: 20px;
+    color: black;
 }
 
 .buttons {
     display: flex;
     align-items: center;
+}
+
+.buttons p {
+    color: black;
 }
 
 .logout {
