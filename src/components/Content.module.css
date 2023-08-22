@@ -206,6 +206,10 @@
     padding: 5px;
 }
 
+.member p {
+    color: black;
+}
+
 .faceWrapper {
     background-color: black;
     width: 80px;
