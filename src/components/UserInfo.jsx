@@ -6,10 +6,12 @@ import { useState } from "react";
 function UserInfo() {
   const [name, setName] = useState("");
 
-  const docRef = doc(col, auth.currentUser.uid);
-  getDoc(docRef).then((doc) => {
-    setName(doc.data().username);
-  });
+  if (auth.currentUser) {
+    const docRef = doc(col, auth.currentUser.uid);
+    getDoc(docRef).then((doc) => {
+      setName(doc.data().username);
+    });
+  }
 
   return (
     <div className={styles.userInfo}>
