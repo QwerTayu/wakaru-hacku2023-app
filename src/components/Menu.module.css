@@ -1,13 +1,13 @@
 .menu {
     font-family: 'Gravitas One';
-    font-size: 45px;
+    font-size: 30px;
     letter-spacing: 1px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 80px;
     background-color: #CAFFDF;
     color: #000000;
-    padding: 0 200px;
     box-sizing: border-box;
 }
+
