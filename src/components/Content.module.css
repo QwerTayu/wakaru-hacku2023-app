@@ -147,45 +147,72 @@
     padding: 50px;
 }
 
+/*Statusページ用*/
+
+.statusOrganization {
+    font-size: 40px;
+    font-family: "UD デジタル 教科書体 NP-B","UD Digi Kyokasho NP-B";
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.members {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 100px);
+}
+
 .member {
-    width: 10%;
+    width: 200px;
     height: auto;
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 3px solid #88d3ff;
+    padding: 5px;
+}
+
+.faceWrapper {
+    background-color: black;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
 }
 
 .face {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 10%;
     width: 80px;
     height: 80px;
     border-radius: 50%;
     position: relative;
 }
 
-.member p {
-    position: relative;
-    text-align: center;
-    top: 5px;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-}
-
-.members {
+.faceWrapped {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
-    width: 100%;
+    flex-wrap: wrap;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    opacity: 0.6;
 }
 
-
-
-.statusOrganization {
-    font-size: 40px;
-    font-family: "UD デジタル 教科書体 NP-B","UD Digi Kyokasho NP-B";
-    position: absolute;
-    left: 300px;
-    top: 170px;
+.memberInfo {
+    font-size: 20px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around
 }

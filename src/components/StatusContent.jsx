@@ -36,11 +36,13 @@ function StatusContent() {
               </p>
             : 
               <p className={styles.faceWrapper}>
-                <img src='/userIcon.png' alt="" className={styles.face}/>
+                <img src='/userIcon.png' alt="" className={styles.faceWrapped}/>
               </p>
             }
-            <p>{user.username.substring(0, 5)}</p>
-            <p>{user.outTimeHour}:{user.outTimeMinute}</p>
+            <div className={styles.memberInfo}>
+              <p>{user.username.substring(0, 5)}</p>
+              <p>{user.outTimeHour}:{user.outTimeMinute}</p>
+            </div>
           </div>
         ))}
       </div>
