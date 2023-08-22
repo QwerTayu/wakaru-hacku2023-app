@@ -12,9 +12,9 @@ function UserInfo() {
   });
 
   return (
-    <div className="user-info">
-        <img src="/userIcon.jpg" alt="avatar" className={styles.userImage}/>
-        <p className={styles.userOrganization}>明石高専</p>
+    <div className={styles.userInfo}>
+        <img src="/userIcon.png" alt="avatar" className={styles.userImage}/>
+        <p className={styles.userOrganization}>MuTech開発部(笑)</p>
         <p className={styles.userName}>{name.substring(0, 5)}</p>
     </div>
   );

@@ -86,6 +86,8 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: 'Krona One', 'Noto Sans JP', sans-serif;
+  color: black;
+  background-color: #efefef;
 }
 
 body {
