@@ -5,9 +5,12 @@ import { logOut } from "@/firebase";
 function Header() {
   return (
     <div className={styles.header}>
-      <p>WAKARU</p>
+      <p className={styles.title}>WAKARU</p>
       <div className={styles.buttons}>
-        <button type={'button'} onClick={logOut} className={styles.logout}>Logout</button>
+        <button type={'button'} onClick={logOut} className={styles.logout}>
+          <p>Log</p>
+          <p>out</p>
+        </button>
         <Link href="/setting" legacyBehavior>
           <a className={styles.setting}>
             <img src="/userIcon.png" alt="Setting" />
