@@ -82,12 +82,19 @@
 html,
 body {
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: 'Krona One', 'Noto Sans JP', sans-serif;
   color: black;
   background-color: #efefef;
+}
+
+@supports (--css: variables) { /* dvhをサポートするブラウザにのみ適用 */
+  html,
+  body {
+    height: 100dvh;
+  }
 }
 
 body {
