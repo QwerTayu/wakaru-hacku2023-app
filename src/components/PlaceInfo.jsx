@@ -11,6 +11,20 @@ export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
 
+    // const userPositionValue = UserPosition();
+    // const [docRef, setDocRef] = useState(null);
+    // useEffect(() => {
+    //   if (auth.currentUser) {
+    //     const newDocRef = doc(col, auth.currentUser.uid);
+    //     setDocRef(newDocRef);
+    //     const unsubscribe = () => {
+    //         updateDoc(newDocRef, {placeLat: userPositionValue.latitude});
+    //         updateDoc(newDocRef, {placeLng: userPositionValue.longitude});
+    //     };
+    //     return () => unsubscribe();
+    //   };
+    // }, [auth.currentUser, userPositionValue]);
+
     const docRef = doc(col, auth.currentUser.uid);
     
     const userPositionValue = UserPosition();
@@ -38,9 +52,8 @@ export default function PlaceInfo () {
     return (
         <>
             {users.filter((user) => user.isInOffice === true).map((user) => (
-                <>
+                <div key={user.id}>
                     <MarkerF
-                    key={user.id}
                     position={{
                         lat: user.placeLat,
                         lng: user.placeLng,
@@ -53,7 +66,6 @@ export default function PlaceInfo () {
                     }}
                     />
                     <InfoWindowF
-                        key={user.id}
                         position={{
                             lat: user.placeLat,
                             lng: user.placeLng,
@@ -61,10 +73,10 @@ export default function PlaceInfo () {
                     >
                         <div className={styles.markerWindow}>
                             <h1>{user.username.substring(0, 5)}</h1>
-                            <h2>{user.outTimeHour}:{user.outTimeMinute}</h2>
+                            <h2>-{user.outTimeHour}:{user.outTimeMinute}</h2>
                         </div>
                     </InfoWindowF>
-                </>
+                </div>
             ))}
         </>
     );
