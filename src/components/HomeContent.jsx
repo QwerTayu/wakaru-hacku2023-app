@@ -37,11 +37,11 @@ function HomeContent() {
           // リアルタイムで取得
           onSnapshot(userData, (user) => {
               setUsers(user.docs.map((doc) => ({ ...doc.data() })));
-              StopSharing(users);
           });
       });
   }, []);
 
+  StopSharing(users);
 
   const handleChangeStatus = (e) => {
     

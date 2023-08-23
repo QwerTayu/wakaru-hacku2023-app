@@ -18,10 +18,11 @@ function StatusContent() {
           // リアルタイムで取得
           onSnapshot(userData, (user) => {
               setUsers(user.docs.map((doc) => ({ ...doc.data() })));
-              StopSharing(users);
           });
       });
   }, []);
+
+  StopSharing(users);
 
   return (
     <div className={styles.container}>
