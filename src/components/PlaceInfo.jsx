@@ -38,9 +38,8 @@ export default function PlaceInfo () {
     return (
         <>
             {users.filter((user) => user.isInOffice === true).map((user) => (
-                <>
+                <div key={user.id}>
                     <MarkerF
-                    key={user.id}
                     position={{
                         lat: user.placeLat,
                         lng: user.placeLng,
@@ -53,7 +52,6 @@ export default function PlaceInfo () {
                     }}
                     />
                     <InfoWindowF
-                        key={user.id}
                         position={{
                             lat: user.placeLat,
                             lng: user.placeLng,
@@ -64,7 +62,7 @@ export default function PlaceInfo () {
                             <h2>-{user.outTimeHour}:{user.outTimeMinute}</h2>
                         </div>
                     </InfoWindowF>
-                </>
+                </div>
             ))}
         </>
     );
