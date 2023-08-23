@@ -10,6 +10,7 @@ import StopSharing from "@/components/StopSharing";
 export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
+    const nowTime = new Date();
 
     // const userPositionValue = UserPosition();
     // const [docRef, setDocRef] = useState(null);
@@ -51,7 +52,7 @@ export default function PlaceInfo () {
 
     useEffect(() => {
         StopSharing(users);
-    }, [users]);
+    }, [users, nowTime.getMinutes()]);
 
     return (
         <>

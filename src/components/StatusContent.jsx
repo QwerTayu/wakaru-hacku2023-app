@@ -7,6 +7,7 @@ import StopSharing from '@/components/StopSharing';
 function StatusContent() {
 
   const [users, setUsers] = useState([]);
+  const nowTime = new Date();
 
   useEffect(() => {
       // データベースからデータを取得する
@@ -26,7 +27,7 @@ function StatusContent() {
 
   useEffect(() => {
     StopSharing(users);
-  }, [users]);
+  }, [users, nowTime.getMinutes()]);
 
   return (
     <div className={styles.container}>
