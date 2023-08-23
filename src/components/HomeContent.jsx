@@ -13,7 +13,7 @@ function HomeContent() {
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
   const [docRef, setDocRef] = useState(null);
-  const nowTime = new Date();
+  const [nowTime, setNowTime] = useState(new Date());
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -42,9 +42,12 @@ function HomeContent() {
       });
   }, []);
 
-  // StopSharing(users);
+  setInterval(() => {
+    setNowTime(new Date());
+  }, 60000);
 
   useEffect(() => {
+    console.log("changed");
     StopSharing(users);
   }, [users, nowTime.getMinutes()]);
 
@@ -108,6 +111,9 @@ function HomeContent() {
 
   return (
     <div className={styles.container}>
+      <p className={styles.nowTime}>
+        {String(nowTime.getHours()).padStart(2, '0')}:{String(nowTime.getMinutes()).padStart(2, '0')}
+      </p>
       <div className={styles.homeContainer}>
         <UserInfo />
         <div className={styles.userStatus}>
@@ -136,7 +142,9 @@ function HomeContent() {
                 ▼
               </button>
             </div>
-            <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
+            <p className={styles.goHomeTime}>
+              {String(goHomeTime.hour).padStart(2, '0')}:{String(goHomeTime.minute).padStart(2, '0')}
+            </p>
             <div className={styles.goHomeTimeMinute}> {/* ここのクラス名変更禁止 */}
               <button 
                 onClick={(e) => handleClickUp(e)}

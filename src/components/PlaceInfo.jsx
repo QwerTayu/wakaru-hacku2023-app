@@ -10,7 +10,7 @@ import StopSharing from "@/components/StopSharing";
 export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
-    const nowTime = new Date();
+    const [nowTime, setNowTime] = useState(new Date());
 
     // const userPositionValue = UserPosition();
     // const [docRef, setDocRef] = useState(null);
@@ -48,7 +48,9 @@ export default function PlaceInfo () {
 
     }, []);
 
-    // StopSharing(users);
+    setInterval(() => {
+        setNowTime(new Date());
+      }, 60000);
 
     useEffect(() => {
         StopSharing(users);
@@ -78,7 +80,9 @@ export default function PlaceInfo () {
                     >
                         <div className={styles.markerWindow}>
                             <h1>{user.username.substring(0, 5)}</h1>
-                            <h2>-{user.outTimeHour}:{user.outTimeMinute}</h2>
+                            <h2>
+                                -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
+                            </h2>
                         </div>
                     </InfoWindowF>
                 </div>
