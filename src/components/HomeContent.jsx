@@ -41,7 +41,11 @@ function HomeContent() {
       });
   }, []);
 
-  StopSharing(users);
+  // StopSharing(users);
+
+  useEffect(() => {
+    StopSharing(users);
+  }, [users]);
 
   const handleChangeStatus = (e) => {
     

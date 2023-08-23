@@ -22,7 +22,11 @@ function StatusContent() {
       });
   }, []);
 
-  StopSharing(users);
+  // StopSharing(users);
+
+  useEffect(() => {
+    StopSharing(users);
+  }, [users]);
 
   return (
     <div className={styles.container}>

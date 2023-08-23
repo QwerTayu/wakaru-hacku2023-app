@@ -47,7 +47,11 @@ export default function PlaceInfo () {
 
     }, []);
 
-    StopSharing(users);
+    // StopSharing(users);
+
+    useEffect(() => {
+        StopSharing(users);
+    }, [users]);
 
     return (
         <>
