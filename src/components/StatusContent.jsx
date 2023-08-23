@@ -7,7 +7,8 @@ import StopSharing from '@/components/StopSharing';
 function StatusContent() {
 
   const [users, setUsers] = useState([]);
-
+  const [nowTime, setNowTime] = useState(new Date());
+  
   useEffect(() => {
       // データベースからデータを取得する
       const userData = col;
@@ -22,7 +23,13 @@ function StatusContent() {
       });
   }, []);
 
-  StopSharing(users);
+  setInterval(() => {
+    setNowTime(new Date());
+  }, 60000);
+
+  useEffect(() => {
+    StopSharing(users);
+  }, [users, nowTime.getMinutes()]);
 
   return (
     <div className={styles.container}>
@@ -41,7 +48,9 @@ function StatusContent() {
             }
             <div className={styles.memberInfo}>
               <p>{user.username.substring(0, 5)}</p>
-              <p>-{user.outTimeHour}:{user.outTimeMinute}</p>
+              <p>
+                -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
+              </p>
             </div>
           </div>
         ))}

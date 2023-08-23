@@ -24,11 +24,14 @@
         justify-content: space-around;
         align-items: center;
     }
-    .userInfo {
-        display: flex;
-        flex-direction: column;
-        width: 350px;
-        height: 400px;
+
+    .nowTime {
+        font-family: "BIZ UDP明朝","BIZ UDPMincho";
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+        margin-top: 30px;
     }
 }
 
@@ -41,15 +44,24 @@
         background-color: white;
         justify-content: space-around;
         align-items: center;
-        margin-top: 250px;
     }
-    .userInfo {
-        display: flex;
-        flex-direction: column;
-        width: 350px;
-        height: 400px;
-    } 
+    
+    .nowTime {
+        font-family: "BIZ UDP明朝","BIZ UDPMincho";
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+        margin-top: 350px;
+    }
 }
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 400px;
+} 
 
 .userImage {
     width: 200px;
