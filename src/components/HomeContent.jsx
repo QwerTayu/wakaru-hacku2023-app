@@ -111,6 +111,9 @@ function HomeContent() {
 
   return (
     <div className={styles.container}>
+      <p className={styles.nowTime}>
+        {String(nowTime.getHours()).padStart(2, '0')}:{String(nowTime.getMinutes()).padStart(2, '0')}
+      </p>
       <div className={styles.homeContainer}>
         <UserInfo />
         <div className={styles.userStatus}>
