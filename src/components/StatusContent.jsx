@@ -48,7 +48,9 @@ function StatusContent() {
             }
             <div className={styles.memberInfo}>
               <p>{user.username.substring(0, 5)}</p>
-              <p>-{user.outTimeHour}:{user.outTimeMinute}</p>
+              <p>
+                -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
+              </p>
             </div>
           </div>
         ))}

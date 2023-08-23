@@ -142,7 +142,9 @@ function HomeContent() {
                 ▼
               </button>
             </div>
-            <p className={styles.goHomeTime}>{goHomeTime.hour}:{goHomeTime.minute}</p>
+            <p className={styles.goHomeTime}>
+              {String(goHomeTime.hour).padStart(2, '0')}:{String(goHomeTime.minute).padStart(2, '0')}
+            </p>
             <div className={styles.goHomeTimeMinute}> {/* ここのクラス名変更禁止 */}
               <button 
                 onClick={(e) => handleClickUp(e)}

@@ -80,7 +80,9 @@ export default function PlaceInfo () {
                     >
                         <div className={styles.markerWindow}>
                             <h1>{user.username.substring(0, 5)}</h1>
-                            <h2>-{user.outTimeHour}:{user.outTimeMinute}</h2>
+                            <h2>
+                                -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
+                            </h2>
                         </div>
                     </InfoWindowF>
                 </div>
