@@ -11,6 +11,20 @@ export default function PlaceInfo () {
 
     const [users, setUsers] = useState([]);
 
+    // const userPositionValue = UserPosition();
+    // const [docRef, setDocRef] = useState(null);
+    // useEffect(() => {
+    //   if (auth.currentUser) {
+    //     const newDocRef = doc(col, auth.currentUser.uid);
+    //     setDocRef(newDocRef);
+    //     const unsubscribe = () => {
+    //         updateDoc(newDocRef, {placeLat: userPositionValue.latitude});
+    //         updateDoc(newDocRef, {placeLng: userPositionValue.longitude});
+    //     };
+    //     return () => unsubscribe();
+    //   };
+    // }, [auth.currentUser, userPositionValue]);
+
     const docRef = doc(col, auth.currentUser.uid);
     
     const userPositionValue = UserPosition();
