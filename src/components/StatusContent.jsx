@@ -7,8 +7,8 @@ import StopSharing from '@/components/StopSharing';
 function StatusContent() {
 
   const [users, setUsers] = useState([]);
-  const nowTime = new Date();
-
+  const [nowTime, setNowTime] = useState(new Date());
+  
   useEffect(() => {
       // データベースからデータを取得する
       const userData = col;
@@ -23,7 +23,9 @@ function StatusContent() {
       });
   }, []);
 
-  // StopSharing(users);
+  setInterval(() => {
+    setNowTime(new Date());
+  }, 60000);
 
   useEffect(() => {
     StopSharing(users);

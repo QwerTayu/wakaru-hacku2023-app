@@ -13,7 +13,7 @@ function HomeContent() {
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
   const [docRef, setDocRef] = useState(null);
-  const nowTime = new Date();
+  const [nowTime, setNowTime] = useState(new Date());
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -42,9 +42,12 @@ function HomeContent() {
       });
   }, []);
 
-  // StopSharing(users);
+  setInterval(() => {
+    setNowTime(new Date());
+  }, 60000);
 
   useEffect(() => {
+    console.log("changed");
     StopSharing(users);
   }, [users, nowTime.getMinutes()]);
 
