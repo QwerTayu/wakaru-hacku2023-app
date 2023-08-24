@@ -1,7 +1,9 @@
+import { auth, col } from '@/firebase';
 import styles from './Content.module.css'
 import PlaceInfo from '@/components/PlaceInfo';
 
 import { GoogleMap, useLoadScript} from '@react-google-maps/api';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const libraries = ["places"];
@@ -45,6 +47,9 @@ function  MapContent() {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
+  const handleRequest = () => {
+    updateDoc(doc(col, auth.currentUser.uid), {reQuestReload: true});
+  };
 
   return (
     <div className={styles.container}>
@@ -57,6 +62,12 @@ function  MapContent() {
       >
         <PlaceInfo />
       </GoogleMap>
+      <button 
+        onClick={() => handleRequest()}
+        className={styles.updateButton}
+      >
+        更新
+      </button>
     </div>
   );
 };
