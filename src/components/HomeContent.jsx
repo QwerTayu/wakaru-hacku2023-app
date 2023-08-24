@@ -4,7 +4,6 @@ import UserInfo from "@/components/UserInfo";
 import { doc,  getDoc,  getDocs,  onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 import StopSharing from "@/components/StopSharing";
-import { router } from "next/router";
 
 function HomeContent() {
 
