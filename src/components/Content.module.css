@@ -154,7 +154,10 @@
 }
 
 .goHomeTimeUp {
-    color: black; 
+    background-color: #3cb7ff;
+    border-color: white;
+    color: white;
+    border-radius: 20%;
     height: 45%;
     width: 100%;
     margin: auto;
@@ -162,7 +165,10 @@
 }
 
 .goHomeTimeDown {
-    color: black; 
+    background-color: #3cb7ff;
+    border-color: white;
+    color: white;
+    border-radius: 20%;
     height: 45%;
     width: 100%;
     margin: auto;
