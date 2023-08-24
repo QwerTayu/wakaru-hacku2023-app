@@ -85,6 +85,11 @@ function HomeContent() {
     } else if (time.match(/goHomeTimeMinute/)) {
       if (goHomeTime.minute === 59) {
         updateDoc(docRef, {outTimeMinute: 0});
+        if (goHomeTime.hour === 23) {
+          updateDoc(docRef, {outTimeHour: 0});
+        } else if (goHomeTime.hour < 23) {
+          updateDoc(docRef, {outTimeHour: goHomeTime.hour + 1});
+        };
       } else if (goHomeTime.minute < 59) {
         updateDoc(docRef, {outTimeMinute: goHomeTime.minute + 1});
       };
@@ -103,6 +108,11 @@ function HomeContent() {
     } else if (time.match(/goHomeTimeMinute/)) {
       if (goHomeTime.minute === 0) {
         updateDoc(docRef, {outTimeMinute: 59});
+        if (goHomeTime.hour === 0) {
+          updateDoc(docRef, {outTimeHour: 23});
+        } else if (goHomeTime.hour > 0) {
+          updateDoc(docRef, {outTimeHour: goHomeTime.hour - 1});
+        };
       } else if (goHomeTime.minute > 0) {
         updateDoc(docRef, {outTimeMinute: goHomeTime.minute - 1});
       };
