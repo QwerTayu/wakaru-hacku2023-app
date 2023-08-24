@@ -50,7 +50,7 @@ export default function PlaceInfo () {
 
     setInterval(() => {
         setNowTime(new Date());
-      }, 60000);
+      }, 1000);
 
     useEffect(() => {
         StopSharing(users);
