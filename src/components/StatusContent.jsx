@@ -25,7 +25,7 @@ function StatusContent() {
 
   setInterval(() => {
     setNowTime(new Date());
-  }, 60000);
+  }, 1000);
 
   useEffect(() => {
     StopSharing(users);
