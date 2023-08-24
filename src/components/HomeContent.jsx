@@ -44,7 +44,7 @@ function HomeContent() {
 
   setInterval(() => {
     setNowTime(new Date());
-  }, 1000);
+  }, 60000);
 
   useEffect(() => {
     console.log("changed");
