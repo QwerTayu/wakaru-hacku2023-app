@@ -34,6 +34,7 @@ function signIn() {
                         outTimeMinute: 20,
                         archiveLat: 35,
                         archiveLng: 135,
+                        reQuestReload: false,
                     });
                 } catch (e) {
                     console.error("Error adding document: ", e);
