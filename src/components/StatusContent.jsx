@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Content.module.css'
 import { getDocs, onSnapshot } from 'firebase/firestore';
-import { col, db } from '@/firebase';
+import { col } from '@/firebase';
 import StopSharing from '@/components/StopSharing';
 
 function StatusContent() {

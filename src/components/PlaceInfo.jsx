@@ -12,26 +12,11 @@ export default function PlaceInfo () {
     const [users, setUsers] = useState([]);
     const [nowTime, setNowTime] = useState(new Date());
 
-    // const userPositionValue = UserPosition();
-    // const [docRef, setDocRef] = useState(null);
-    // useEffect(() => {
-    //   if (auth.currentUser) {
-    //     const newDocRef = doc(col, auth.currentUser.uid);
-    //     setDocRef(newDocRef);
-    //     const unsubscribe = () => {
-    //         updateDoc(newDocRef, {placeLat: userPositionValue.latitude});
-    //         updateDoc(newDocRef, {placeLng: userPositionValue.longitude});
-    //     };
-    //     return () => unsubscribe();
-    //   };
-    // }, [auth.currentUser, userPositionValue]);
 
     const docRef = doc(col, auth.currentUser.uid);
     
     const userPositionValue = UserPosition();
 
-    updateDoc(docRef, {placeLat: userPositionValue.latitude});
-    updateDoc(docRef, {placeLng: userPositionValue.longitude});
 
     useEffect(() => {
         // データベースからデータを取得する
@@ -54,6 +39,15 @@ export default function PlaceInfo () {
 
     useEffect(() => {
         StopSharing(users);
+        updateDoc(docRef, {placeLat: userPositionValue.latitude});
+        updateDoc(docRef, {placeLng: userPositionValue.longitude});
+
+        users.map((user) => {
+            if (user.reQuestReload === true) {
+                updateDoc(doc(col, user.id), {reQuestReload: false});
+                console.log("リロードしました");
+            };
+        });
     }, [users, nowTime.getMinutes()]);
 
     return (

@@ -4,12 +4,10 @@ import UserInfo from "@/components/UserInfo";
 import { doc,  getDoc,  getDocs,  onSnapshot, updateDoc, } from "firebase/firestore";
 import { auth, col } from "@/firebase";
 import StopSharing from "@/components/StopSharing";
-import { router } from "next/router";
 
 function HomeContent() {
 
   const [userStatus, setUserStatus] = useState(false);
-  const [archivePlace, setArchivePlace] = useState({Lat: 0, Lng: 0});
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
   const [docRef, setDocRef] = useState(null);
@@ -58,14 +56,11 @@ function HomeContent() {
       updateDoc(docRef, {isInOffice: false});
       
       getDoc(docRef).then((doc) => {
-        setArchivePlace({Lat: doc.data().placeLat, Lng: doc.data().placeLng});
+        updateDoc(docRef, {
+          archiveLat: doc.data().placeLat,
+          archiveLng: doc.data().placeLng,
+        });
       });
-
-      updateDoc(docRef, {
-        archiveLat: archivePlace.Lat,
-        archiveLng: archivePlace.Lng,
-      });
-
       
     } else {
       updateDoc(docRef, {isInOffice: true});
@@ -84,7 +79,11 @@ function HomeContent() {
       };
     } else if (time.match(/goHomeTimeMinute/)) {
       if (goHomeTime.minute === 59) {
-        updateDoc(docRef, {outTimeMinute: 0});
+        if (goHomeTime.hour === 23) {
+          updateDoc(docRef, {outTimeHour: 0, outTimeMinute: 0});
+        } else if (goHomeTime.hour < 23) {
+          updateDoc(docRef, {outTimeHour: goHomeTime.hour + 1, outTimeMinute: 0});
+        };
       } else if (goHomeTime.minute < 59) {
         updateDoc(docRef, {outTimeMinute: goHomeTime.minute + 1});
       };
@@ -102,7 +101,11 @@ function HomeContent() {
       };
     } else if (time.match(/goHomeTimeMinute/)) {
       if (goHomeTime.minute === 0) {
-        updateDoc(docRef, {outTimeMinute: 59});
+        if (goHomeTime.hour === 0) {
+          updateDoc(docRef, {outTimeHour: 23, outTimeMinute: 59});
+        } else if (goHomeTime.hour > 0) {
+          updateDoc(docRef, {outTimeHour: goHomeTime.hour - 1, outTimeMinute: 59});
+        };
       } else if (goHomeTime.minute > 0) {
         updateDoc(docRef, {outTimeMinute: goHomeTime.minute - 1});
       };

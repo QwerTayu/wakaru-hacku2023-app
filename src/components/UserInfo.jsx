@@ -1,6 +1,6 @@
 import { auth, col } from "@/firebase";
 import styles from "./Content.module.css";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 function UserInfo() {

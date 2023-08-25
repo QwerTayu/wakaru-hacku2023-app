@@ -154,7 +154,10 @@
 }
 
 .goHomeTimeUp {
-    color: black; 
+    background-color: #3cb7ff;
+    border-color: white;
+    color: white;
+    border-radius: 20%;
     height: 45%;
     width: 100%;
     margin: auto;
@@ -162,7 +165,10 @@
 }
 
 .goHomeTimeDown {
-    color: black; 
+    background-color: #3cb7ff;
+    border-color: white;
+    color: white;
+    border-radius: 20%;
     height: 45%;
     width: 100%;
     margin: auto;
@@ -257,4 +263,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around
+}
+
+/* Mapページ用 */
+.updateButton {
+    color: white;
+    background-color: #ff6ad0;
+    border-color: white;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc(100% - 230px);
+    left: calc(100% - 68px);
 }
