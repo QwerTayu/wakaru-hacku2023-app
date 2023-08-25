@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Content.module.css'
 import { getDocs, onSnapshot } from 'firebase/firestore';
-import { col } from '@/firebase';
+import { auth, col } from '@/firebase';
 import StopSharing from '@/components/StopSharing';
 
 function StatusContent() {
@@ -13,12 +13,17 @@ function StatusContent() {
       // データベースからデータを取得する
       const userData = col;
       getDocs(userData).then((snapShot) => {
-          // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
-          setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
-
           // リアルタイムで取得
           onSnapshot(userData, (user) => {
-              setUsers(user.docs.map((doc) => ({ ...doc.data() })));
+              const updatedUserDataArray = user.docs.map((doc) => ({ ...doc.data() }));
+
+              // 現在のユーザー情報を取得
+              const currentUserData = updatedUserDataArray.find(user => user.username === auth.currentUser.email);
+
+              // ユーザーリストを並び替え、現在のユーザーを一番上に持ってくる
+              const sortedUsers = updatedUserDataArray.filter(user => user.username !== auth.currentUser.email);
+
+              setUsers([currentUserData, ...sortedUsers]);
           });
       });
   }, []);
@@ -26,6 +31,14 @@ function StatusContent() {
   setInterval(() => {
     setNowTime(new Date());
   }, 1000);
+
+  const getDisplayName = (user) => {
+    if (currentUser && user.username === currentUser.username) {
+      return "あなた";
+    } else {
+      return user.username.substring(0, 5);
+    }
+  };
 
   useEffect(() => {
     StopSharing(users);
@@ -47,7 +60,7 @@ function StatusContent() {
               </p>
             }
             <div className={styles.memberInfo}>
-              <p>{user.username.substring(0, 5)}</p>
+              <p>{user.username === auth.currentUser.email ? 'あなた' : user.username.substring(0, 5)}</p>
               <p>
                 -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
               </p>
