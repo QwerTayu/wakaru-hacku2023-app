@@ -13,12 +13,17 @@ function StatusContent() {
       // データベースからデータを取得する
       const userData = col;
       getDocs(userData).then((snapShot) => {
-          // console.log(snapShot.docs.map((doc) => ({ ...doc.data() })));
-          setUsers(snapShot.docs.map((doc) => ({ ...doc.data() })));
-
           // リアルタイムで取得
           onSnapshot(userData, (user) => {
-              setUsers(user.docs.map((doc) => ({ ...doc.data() })));
+              const updatedUserDataArray = user.docs.map((doc) => ({ ...doc.data() }));
+
+              // 現在のユーザー情報を取得
+              const currentUserData = updatedUserDataArray.find(user => user.username === auth.currentUser.email);
+
+              // ユーザーリストを並び替え、現在のユーザーを一番上に持ってくる
+              const sortedUsers = updatedUserDataArray.filter(user => user.username !== auth.currentUser.email);
+
+              setUsers([currentUserData, ...sortedUsers]);
           });
       });
   }, []);
