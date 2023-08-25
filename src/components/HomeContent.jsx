@@ -8,7 +8,6 @@ import StopSharing from "@/components/StopSharing";
 function HomeContent() {
 
   const [userStatus, setUserStatus] = useState(false);
-  const [archivePlace, setArchivePlace] = useState({Lat: 0, Lng: 0});
   const [goHomeTime, setGoHomeTime] = useState({hour: 23, minute: 59});
   const [users, setUsers] = useState([]);
   const [docRef, setDocRef] = useState(null);
@@ -57,14 +56,11 @@ function HomeContent() {
       updateDoc(docRef, {isInOffice: false});
       
       getDoc(docRef).then((doc) => {
-        setArchivePlace({Lat: doc.data().placeLat, Lng: doc.data().placeLng});
+        updateDoc(docRef, {
+          archiveLat: doc.data().placeLat,
+          archiveLng: doc.data().placeLng,
+        });
       });
-
-      updateDoc(docRef, {
-        archiveLat: archivePlace.Lat,
-        archiveLng: archivePlace.Lng,
-      });
-
       
     } else {
       updateDoc(docRef, {isInOffice: true});
