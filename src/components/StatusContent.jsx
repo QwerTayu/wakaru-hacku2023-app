@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Content.module.css'
 import { getDocs, onSnapshot } from 'firebase/firestore';
-import { col } from '@/firebase';
+import { auth, col } from '@/firebase';
 import StopSharing from '@/components/StopSharing';
 
 function StatusContent() {
@@ -32,6 +32,14 @@ function StatusContent() {
     setNowTime(new Date());
   }, 1000);
 
+  const getDisplayName = (user) => {
+    if (currentUser && user.username === currentUser.username) {
+      return "あなた";
+    } else {
+      return user.username.substring(0, 5);
+    }
+  };
+
   useEffect(() => {
     StopSharing(users);
   }, [users, nowTime.getMinutes()]);
@@ -52,7 +60,7 @@ function StatusContent() {
               </p>
             }
             <div className={styles.memberInfo}>
-              <p>{user.username.substring(0, 5)}</p>
+              <p>{user.username === auth.currentUser.email ? 'あなた' : user.username.substring(0, 5)}</p>
               <p>
                 -{String(user.outTimeHour).padStart(2, '0')}:{String(user.outTimeMinute).padStart(2, '0')}
               </p>
