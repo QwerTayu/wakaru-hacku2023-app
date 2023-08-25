@@ -39,12 +39,11 @@ export default function PlaceInfo () {
 
     useEffect(() => {
         StopSharing(users);
-        // usersの中のドキュメントのどれかのreQuestReloadがtrueの場合、
-        // そのドキュメントのreQuestReloadをfalseにする
+        updateDoc(docRef, {placeLat: userPositionValue.latitude});
+        updateDoc(docRef, {placeLng: userPositionValue.longitude});
+
         users.map((user) => {
             if (user.reQuestReload === true) {
-                updateDoc(doc(col, user.id), {placeLat: userPositionValue.latitude});
-                updateDoc(doc(col, user.id), {placeLng: userPositionValue.longitude});
                 updateDoc(doc(col, user.id), {reQuestReload: false});
                 console.log("リロードしました");
             };
