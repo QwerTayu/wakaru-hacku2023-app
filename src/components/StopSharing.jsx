@@ -1,5 +1,5 @@
 import { col } from "@/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const StopSharing = (users) => {
     const nowTime = new Date();
@@ -23,7 +23,12 @@ const StopSharing = (users) => {
             // そのidを使って、isInOfficeをfalseにする。
             const docRef = doc(col, user.id);
             updateDoc(docRef, {isInOffice: false});
-
+            getDoc(docRef).then((doc) => {
+                updateDoc(docRef, {
+                    archiveLat: doc.data().placeLat,
+                    archiveLng: doc.data().placeLng,
+                });
+            });
 
             console.log(user);
             console.log("done:", user.isInOffice, user);
